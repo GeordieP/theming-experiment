@@ -1,11 +1,9 @@
-# react-ts-starter
+# theming-experiment
 
-Get up and running quickly with React and TypeScript, bundled with Parcel.
+Messing around with emotion styled components, emotion-theming, and context.
 
-Runs Prettier and ESLint in pre-commit hook, runs tests in pre-push hook.
+This app has a React context instance that manages the current theme (dark or light).
 
-Also included:
+Components individually styled by Emotion automatically recieve a `theme` prop with the currently selected theme colors thanks to the `emotion-theming` package.
 
-- jest, react-testing-library, and react-hooks-testing-library
-- normalize.css
-- emotion
+Global styles (e.g. `src/app.css`) use CSS custom properties to apply theme styles to elements globally. When a theme is applied while the app is running, we update all the custom properties, and the global styles recognize the change automatically. This update happens in the `src/context/ThemeContext` module. **Custom Property names** in CSS files must match up with the keys in the **`ThemeColors` interface** to work correctly (also located in `ThemeContext` module).

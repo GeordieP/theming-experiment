@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { AddOrUpdateFilter, RemoveFilter } from "../../hooks/useFilters";
 import styled from "@emotion/styled";
+import { ThemedComponentProps } from "app-theme-context";
 
 interface SearchDependenciesProps {
   addOrUpdateFilter: AddOrUpdateFilter;
@@ -26,7 +27,7 @@ export default function SearchDependencies({
   };
 
   return (
-    <SearchInput
+    <S.SearchInput
       type="text"
       value={value}
       onChange={updateSearch}
@@ -36,11 +37,15 @@ export default function SearchDependencies({
   );
 }
 
-const SearchInput = styled.input`
-  width: 100%;
-  border-radius: 3px;
-  margin-bottom: 10px;
-  border: 1px solid rgba(0, 0, 0, 0.1);
-  font-size: 10pt;
-  padding: 6px;
-`;
+const S = {
+  SearchInput: styled.input((props: ThemedComponentProps) => ({
+    background: props.theme.bgPrimary,
+    color: props.theme.textHighlighted,
+    width: "100%",
+    borderRadius: "3px",
+    marginBottom: "10px",
+    border: "1px solid rgba(0, 0, 0, 0.1)",
+    fontSize: "10px",
+    padding: "6px",
+  }))
+};

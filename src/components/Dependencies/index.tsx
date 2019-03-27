@@ -3,6 +3,7 @@ import styled from "@emotion/styled";
 import pkg from "../../../package.json";
 import useFilters from "../../hooks/useFilters";
 import SearchDependencies from "./SearchDependencies";
+import { ThemedComponentProps } from "app-theme-context";
 
 // Helper functions
 
@@ -14,14 +15,14 @@ function objectToArray(obj) {
 function mapDepsArr(deps) {
   return deps.map(({ name, value }) => (
     <li key={name}>
-      <A
+      <S.A
         href={`https://www.npmjs.com/package/${name}`}
         title="View package on npm"
         target="npm"
       >
         {name}
-        <Version>{value}</Version>
-      </A>
+        <S.Version>{value}</S.Version>
+      </S.A>
     </li>
   ));
 }
@@ -59,19 +60,21 @@ export default function Dependencies() {
   );
 }
 
-const Version = styled.span`
-  background: #f0f4f8;
-  color: #829ab1;
-  margin-left: 5px;
-  font-size: 0.9rem;
-  padding: 1px 4px;
-  border-radius: 3px;
-`;
+const S = {
+  Version: styled.span((props: ThemedComponentProps) => ({
+    background: props.theme.bgPrimary,
+    color: props.theme.textPrimary,
+    marginLeft: "5px",
+    fontSize: "0.9rem",
+    padding: "1px 4px",
+    borderRadius: "3px",
+  })),
 
-const A = styled.a`
-  color: inherit;
-  text-decoration: none;
-  :hover {
-    text-decoration: underline;
-  }
-`;
+  A: styled.a`
+    color: inherit;
+    text-decoration: none;
+    :hover {
+      text-decoration: underline;
+    }
+  `,
+};
